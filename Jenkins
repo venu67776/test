@@ -5,10 +5,7 @@ pipeline {
     triggers {
       pollSCM('* * * * 1-5')
     }
-    environment {
-        Docker_Password = credentials('Docker_Password')
-         Docker_Username = credentials('Docker_Username')
-    }
+    
     stages {
         stage('Docker Build') {
             steps {
