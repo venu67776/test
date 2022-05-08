@@ -30,7 +30,7 @@ pipeline {
             env.get_branch_exec=sh(returnStdout: true, script: get_branch)
                  }
                 sh '''
-                 docker login -u ${Docker_Username} -p ${Docker_Password}
+                //  docker login -u ${Docker_Username} -p ${Docker_Password}
                 docker push 488617992296.dkr.ecr.us-east-1.amazonaws.com/test:${get_branch_exec}
                 '''
             }
