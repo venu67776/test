@@ -3,6 +3,10 @@ pipeline {
     triggers {
       pollSCM('* * * * 1-5')
     }
+    environment {
+        Docker_Password = credentials('Docker_Password')
+         Docker_Username = credentials('Docker_Username')
+    }
     stages {
         stage('Docker Build') {
             steps {
@@ -13,7 +17,6 @@ pipeline {
           } 
           sh '''
             
-            docker login -u venuzs -p venu@1234
             docker build -t venuzs/test:${get_branch_exec} .
           '''
         }
@@ -26,6 +29,7 @@ pipeline {
             env.get_branch_exec=sh(returnStdout: true, script: get_branch)
                  }
                 sh '''
+                 docker login -u ${Docker_Username} -p ${Docker_Password}
                 docker push venuzs/test:${get_branch_exec} 
                 '''
             }
