@@ -27,6 +27,7 @@ pipeline {
                  }
                 sh '''
                 docker push venuzs/test:${get_branch_exec} 
+                '''
             }
         }
     }
